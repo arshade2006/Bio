@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="parallax - C#/Unity Developer">
+    <title>parallax | C#/Unity Developer</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="bg-layer" class="bg-layer"></div>
+    <div class="overlay"></div>
+    <div id="stars-container"></div>
+    
+    <main class="container">
+        <div class="card" id="card">
+            <!-- Header Section -->
+            <header class="profile-header">
+                <div class="avatar">
+                    <img src="Resources/MyAvatar.jpg" alt="Avatar" class="avatar-img">
+                </div>
+                <div class="title-info">
+                    <h1 class="nickname">parallax</h1>
+                    <p class="role">C# / Unity Developer</p>
+                </div>
+            </header>
+
+            <div class="content-divider"></div>
+
+            <!-- About Section -->
+            <section class="info-section">
+                <h2><i class="fa-solid fa-user-astronaut"></i> About Me</h2>
+                <p>Game dev working with C# & Unity. Focused on clean code, engaging mechanics, and bringing cool ideas to life. Reach out via Telegram.</p>
+            </section>
+
+            <!-- Skills Section -->
+            <section class="info-section">
+                <h2><i class="fa-solid fa-code"></i> Skills</h2>
+                <div class="skills-grid">
+                    <span class="skill-tag">C#</span>
+                    <span class="skill-tag">Unity3D</span>
+                    <span class="skill-tag">Game Design</span>
+                    <span class="skill-tag">Git</span>
+                    <span class="skill-tag">OOP / SOLID</span>
+                    <span class="skill-tag">UI / UX</span>
+                </div>
+            </section>
+
+            <!-- Social Links -->
+            <section class="info-section">
+                <h2><i class="fa-solid fa-link"></i> Connect</h2>
+                <div class="links">
+                    <a href="https://t.me/paralaxdev" target="_blank" class="link-btn telegram">
+                        <i class="fa-brands fa-telegram"></i> Telegram (@paralaxdev)
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

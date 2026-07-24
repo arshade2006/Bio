@@ -1,0 +1,266 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    font-family: 'Outfit', sans-serif;
+    overflow-x: hidden;
+    background-color: #0b0c10;
+    color: #fff;
+}
+
+.bg-layer {
+    position: fixed;
+    top: -5%;
+    left: -5%;
+    width: 110%;
+    height: 110%;
+    background-size: cover;
+    background-position: center;
+    /* Уменьшил размытие, чтобы было видно фон */
+    filter: blur(4px) brightness(0.6);
+    z-index: 1;
+    transition: transform 0.1s linear;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Градиент вместо сплошной заливки */
+    background: linear-gradient(135deg, rgba(11, 12, 16, 0.7) 0%, rgba(31, 40, 51, 0.3) 100%);
+    z-index: 2;
+}
+
+/* Контейнер для звезд */
+#stars-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #fff, 0 0 20px #fff;
+    animation: fall linear infinite;
+    opacity: 0;
+}
+
+.star::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.8), transparent);
+    transform: translate(-50%, -50%) rotate(45deg);
+    transform-origin: 0 0;
+}
+
+@keyframes fall {
+    0% {
+        transform: translate3d(100vw, -10vh, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate3d(-10vw, 110vh, 0);
+        opacity: 0;
+    }
+}
+
+.container {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+.card {
+    background: rgba(20, 24, 36, 0.4);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 3rem;
+    width: 100%;
+    max-width: 650px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    flex-shrink: 0;
+    overflow: hidden;
+    background-color: #1a1a24;
+}
+
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.title-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.nickname {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+    letter-spacing: 1px;
+    background: linear-gradient(to right, #fff, #c5c5c5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.role {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #45f3ff;
+    letter-spacing: 1px;
+}
+
+.content-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    margin: 2rem 0;
+}
+
+.info-section {
+    margin-bottom: 2.5rem;
+}
+
+.info-section:last-child {
+    margin-bottom: 0;
+}
+
+.info-section h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: #e0e0e0;
+}
+
+.info-section p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #b0b3b8;
+    font-weight: 300;
+}
+
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.skill-tag {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #d1d5db;
+    transition: all 0.3s ease;
+}
+
+.skill-tag:hover {
+    background: rgba(69, 243, 255, 0.1);
+    border-color: #45f3ff;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.links {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.link-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    text-decoration: none;
+    padding: 1.2rem;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.link-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.link-btn.telegram:hover {
+    background: rgba(36, 161, 222, 0.2);
+    border-color: #24a1de;
+}
+
+.link-btn.github:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 600px) {
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    .links {
+        grid-template-columns: 1fr;
+    }
+    .card {
+        padding: 2rem;
+    }
+}
