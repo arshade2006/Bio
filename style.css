@@ -21,7 +21,6 @@ body, html {
     height: 110%;
     background-size: cover;
     background-position: center;
-    /* Уменьшил размытие, чтобы было видно фон */
     filter: blur(4px) brightness(0.6);
     z-index: 1;
     transition: transform 0.1s linear;
@@ -33,12 +32,10 @@ body, html {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Градиент вместо сплошной заливки */
     background: linear-gradient(135deg, rgba(11, 12, 16, 0.7) 0%, rgba(31, 40, 51, 0.3) 100%);
     z-index: 2;
 }
 
-/* Контейнер для звезд */
 #stars-container {
     position: fixed;
     top: 0;
@@ -74,14 +71,8 @@ body, html {
 }
 
 @keyframes fall {
-    0% {
-        transform: translate3d(100vw, -10vh, 0);
-        opacity: 1;
-    }
-    100% {
-        transform: translate3d(-10vw, 110vh, 0);
-        opacity: 0;
-    }
+    0% { transform: translate3d(100vw, -10vh, 0); opacity: 1; }
+    100% { transform: translate3d(-10vw, 110vh, 0); opacity: 0; }
 }
 
 .container {
@@ -92,6 +83,8 @@ body, html {
     align-items: center;
     min-height: 100vh;
     padding: 2rem;
+    /* Added perspective for 3D tilt effect */
+    perspective: 1000px;
 }
 
 .card {
@@ -105,6 +98,9 @@ body, html {
     max-width: 650px;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     animation: fadeIn 1s ease-out;
+    /* transition for smooth return on mouse leave */
+    transition: transform 0.2s ease-out;
+    transform-style: preserve-3d;
 }
 
 @keyframes fadeIn {
@@ -117,6 +113,7 @@ body, html {
     align-items: center;
     gap: 2rem;
     margin-bottom: 2rem;
+    transform: translateZ(30px);
 }
 
 .avatar {
@@ -131,6 +128,13 @@ body, html {
     flex-shrink: 0;
     overflow: hidden;
     background-color: #1a1a24;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+}
+
+.avatar:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 15px 30px rgba(69, 243, 255, 0.5);
+    border-color: rgba(69, 243, 255, 0.5);
 }
 
 .avatar-img {
@@ -149,9 +153,15 @@ body, html {
     font-weight: 700;
     margin-bottom: 0.2rem;
     letter-spacing: 1px;
-    background: linear-gradient(to right, #fff, #c5c5c5);
+    background: linear-gradient(to right, #fff, #45f3ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    animation: glowText 3s infinite alternate ease-in-out;
+}
+
+@keyframes glowText {
+    0% { filter: drop-shadow(0 0 2px rgba(69, 243, 255, 0.2)); }
+    100% { filter: drop-shadow(0 0 10px rgba(69, 243, 255, 0.6)); }
 }
 
 .role {
@@ -165,10 +175,12 @@ body, html {
     height: 1px;
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
     margin: 2rem 0;
+    transform: translateZ(20px);
 }
 
 .info-section {
     margin-bottom: 2.5rem;
+    transform: translateZ(20px);
 }
 
 .info-section:last-child {
@@ -183,6 +195,11 @@ body, html {
     align-items: center;
     gap: 0.8rem;
     color: #e0e0e0;
+}
+
+.info-section h2 i {
+    color: #45f3ff;
+    text-shadow: 0 0 10px rgba(69, 243, 255, 0.5);
 }
 
 .info-section p {
@@ -206,19 +223,22 @@ body, html {
     font-size: 0.95rem;
     color: #d1d5db;
     transition: all 0.3s ease;
+    cursor: default;
 }
 
 .skill-tag:hover {
     background: rgba(69, 243, 255, 0.1);
     border-color: #45f3ff;
     color: #fff;
-    transform: translateY(-2px);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 5px 15px rgba(69, 243, 255, 0.2);
 }
 
 .links {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
+    transform: translateZ(30px);
 }
 
 .link-btn {
@@ -235,6 +255,21 @@ body, html {
     font-size: 1.05rem;
     transition: all 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.link-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.link-btn:hover::before {
+    left: 100%;
 }
 
 .link-btn:hover {
@@ -245,22 +280,39 @@ body, html {
 .link-btn.telegram:hover {
     background: rgba(36, 161, 222, 0.2);
     border-color: #24a1de;
+    box-shadow: 0 10px 20px rgba(36, 161, 222, 0.2);
 }
 
-.link-btn.github:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.5);
-}
-
+/* MOBILE RESPONSIVENESS */
 @media (max-width: 600px) {
+    .container {
+        padding: 1rem;
+    }
+    .card {
+        padding: 1.5rem;
+        border-radius: 16px;
+        transform: none !important; /* Disable 3D tilt on mobile */
+    }
     .profile-header {
         flex-direction: column;
         text-align: center;
+        gap: 1rem;
     }
-    .links {
-        grid-template-columns: 1fr;
+    .avatar {
+        width: 100px;
+        height: 100px;
     }
-    .card {
-        padding: 2rem;
+    .nickname {
+        font-size: 2.2rem;
+    }
+    .info-section h2 {
+        justify-content: center;
+    }
+    .info-section p {
+        text-align: center;
+        font-size: 1rem;
+    }
+    .skills-grid {
+        justify-content: center;
     }
 }

@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const bgLayer = document.getElementById('bg-layer');
+    const card = document.getElementById('card');
 
     // High-quality space/stars backgrounds
     const backgrounds = [
@@ -26,7 +27,13 @@ document.addEventListener('DOMContentLoaded', () => {
         mouseY = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
     });
 
-    // Smooth animation loop for parallax
+    // Reset rotation on mouse leave
+    document.addEventListener('mouseleave', () => {
+        mouseX = 0;
+        mouseY = 0;
+    });
+
+    // Smooth animation loop for parallax and 3D tilt
     function animate() {
         // Lerp for smooth movement
         currentX += (mouseX - currentX) * 0.05;
@@ -35,8 +42,18 @@ document.addEventListener('DOMContentLoaded', () => {
         // Move ONLY the background (move opposite to mouse)
         const bgMoveX = currentX * 25; 
         const bgMoveY = currentY * 25;
-        // scale is to prevent edges from showing during parallax
         bgLayer.style.transform = `translate(${-bgMoveX}px, ${-bgMoveY}px) scale(1.05)`; 
+
+        // 3D Tilt effect for the card (only if not on mobile)
+        if (window.innerWidth > 600) {
+            // Rotate card based on mouse position
+            const rotateX = -currentY * 10; // max 10 degrees
+            const rotateY = currentX * 10;
+            
+            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        } else {
+            card.style.transform = `none`;
+        }
 
         requestAnimationFrame(animate);
     }
@@ -44,20 +61,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Falling Stars Generator
     const starsContainer = document.getElementById('stars-container');
-    const starsCount = 20; // Number of stars on screen at once
+    const starsCount = 20;
 
     function createStar() {
         const star = document.createElement('div');
         star.classList.add('star');
         
-        // Random position (starting from top right mostly)
         const startPosX = Math.random() * window.innerWidth * 1.5; 
         const startPosY = Math.random() * window.innerHeight * 0.5 - 100;
         
         star.style.left = `${startPosX}px`;
         star.style.top = `${startPosY}px`;
         
-        const animationDuration = Math.random() * 3 + 2; // 2s to 5s
+        const animationDuration = Math.random() * 3 + 2;
         star.style.animationDuration = `${animationDuration}s`;
         
         const animationDelay = Math.random() * 5;
@@ -65,7 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         starsContainer.appendChild(star);
 
-        // Remove star after animation ends and create a new one
         setTimeout(() => {
             star.remove();
             createStar();
