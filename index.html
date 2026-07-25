@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="parallax - C#/Unity Developer">
     <title>parallax | C#/Unity Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -20,7 +23,7 @@
             <!-- Header Section -->
             <header class="profile-header">
                 <div class="avatar">
-                    <img src="Resources/MyAvatar.jpg" alt="Avatar" class="avatar-img">
+                    <img src="Resources/MyAvatar.jpg" alt="Avatar" class="avatar-img" width="120" height="120" decoding="async">
                 </div>
                 <div class="title-info">
                     <h1 class="nickname">parallax <span class="status-badge"><span class="status-dot"></span>online</span></h1>
@@ -73,7 +76,7 @@
                     <div class="projects-content">
                         <div class="project-card">
                             <div class="project-card-inner">
-                                <img src="Resources/horizonSurvival.jpg" alt="Horizon Survival" class="project-image">
+                                <img src="Resources/horizonSurvival.jpg" alt="Horizon Survival" class="project-image" width="90" height="90" loading="lazy" decoding="async">
                                 <div class="project-info">
                                     <h3>Horizon: Survival 🎮</h3>
                                     <p>Многопользовательский симулятор выживания в открытом мире в стиле Rust 🌿. Оптимизирован для мобильных платформ и ПК — суровое выживание даже на слабом железе ⚡️.</p>
@@ -86,6 +89,6 @@
         </div>
     </main>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>

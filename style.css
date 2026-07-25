@@ -31,6 +31,7 @@ body, html {
         0 0 5px 1px hsl(0, 80%, 45%),
         0 0 12px 3px hsla(0, 80%, 45%, 0.35);
     animation: rgbCursor 3s linear infinite;
+    will-change: transform;
 }
 
 @keyframes rgbCursor {
@@ -59,6 +60,7 @@ a, button, .projects-summary, .skill-tag {
     filter: blur(4px) brightness(0.6);
     z-index: 1;
     transition: transform 0.1s linear;
+    will-change: transform;
 }
 
 .overlay {
@@ -174,6 +176,7 @@ a, button, .projects-summary, .skill-tag {
     animation: fadeIn 1s ease-out;
     transition: transform 0.2s ease-out;
     transform-style: preserve-3d;
+    will-change: transform;
 }
 
 @keyframes fadeIn {
@@ -577,11 +580,6 @@ a, button, .projects-summary, .skill-tag {
     .links {
         grid-template-columns: 1fr;
     }
-}
-
-@keyframes animateOutline {
-    0% { background-position: 0 0; }
-    100% { background-position: 200% 0; }
 }
 
 @keyframes particleFade {
