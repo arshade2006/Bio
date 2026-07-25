@@ -88,7 +88,7 @@ a, button, .projects-summary, .skill-tag {
     height: 2px;
     background: #fff;
     border-radius: 50%;
-    box-shadow: 0 0 10px #fff, 0 0 20px #fff;
+    box-shadow: 0 0 6px #fff, 0 0 12px #fff;
     animation: fall linear infinite;
     opacity: 0;
 }
@@ -98,11 +98,51 @@ a, button, .projects-summary, .skill-tag {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 60px;
+    width: 50px;
     height: 1px;
-    background: linear-gradient(90deg, rgba(255,255,255,0.8), transparent);
+    background: linear-gradient(90deg, rgba(255,255,255,0.6), transparent);
     transform: translate(-50%, -50%) rotate(45deg);
     transform-origin: 0 0;
+}
+
+/* Comet — bigger with long glowing tail */
+.comet {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 8px 2px #fff, 0 0 20px 6px rgba(180, 230, 255, 0.6);
+    animation: fall linear infinite;
+    opacity: 0;
+}
+
+.comet::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 180px;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.9), rgba(100, 200, 255, 0.4), transparent);
+    transform: translate(-50%, -50%) rotate(45deg);
+    transform-origin: 0 0;
+    filter: blur(1px);
+}
+
+/* Static twinkling background stars */
+.twinkle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkleAnim ease-in-out infinite;
+}
+
+@keyframes twinkleAnim {
+    0%, 100% { opacity: 0.1; transform: scale(1); }
+    50%       { opacity: 0.9; transform: scale(1.5); }
 }
 
 @keyframes fall {

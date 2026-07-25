@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Falling Stars Generator
     const starsContainer = document.getElementById('stars-container');
-    const starsCount = 20;
+    const starsCount = 40; // More shooting stars
 
     function createStar() {
         const star = document.createElement('div');
@@ -87,9 +87,53 @@ document.addEventListener('DOMContentLoaded', () => {
         }, (animationDuration + animationDelay) * 1000);
     }
 
-    // Initialize stars
+    // Initialize shooting stars
     for (let i = 0; i < starsCount; i++) {
         createStar();
+    }
+
+    // Comet spawner (bigger, brighter, longer tail)
+    function createComet() {
+        const comet = document.createElement('div');
+        comet.classList.add('comet');
+
+        const startPosX = Math.random() * window.innerWidth * 1.5;
+        const startPosY = Math.random() * window.innerHeight * 0.3 - 100;
+
+        comet.style.left = `${startPosX}px`;
+        comet.style.top  = `${startPosY}px`;
+
+        const duration = Math.random() * 2 + 2.5; // 2.5s–4.5s
+        const delay    = Math.random() * 10 + 3;  // rarer than stars
+
+        comet.style.animationDuration = `${duration}s`;
+        comet.style.animationDelay    = `${delay}s`;
+
+        starsContainer.appendChild(comet);
+
+        setTimeout(() => {
+            comet.remove();
+            createComet();
+        }, (duration + delay) * 1000);
+    }
+
+    // Spawn 5 comets
+    for (let i = 0; i < 5; i++) {
+        createComet();
+    }
+
+    // Static twinkling background stars (dots that don't move)
+    for (let i = 0; i < 80; i++) {
+        const twinkle = document.createElement('div');
+        twinkle.classList.add('twinkle');
+        twinkle.style.left = `${Math.random() * 100}vw`;
+        twinkle.style.top  = `${Math.random() * 100}vh`;
+        twinkle.style.animationDuration  = `${Math.random() * 3 + 1.5}s`;
+        twinkle.style.animationDelay     = `${Math.random() * 4}s`;
+        const size = Math.random() > 0.8 ? '3px' : '2px';
+        twinkle.style.width  = size;
+        twinkle.style.height = size;
+        starsContainer.appendChild(twinkle);
     }
     
     // Dropdown Logic
