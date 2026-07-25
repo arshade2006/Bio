@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    cursor: none !important; /* Force custom cursor everywhere */
 }
 
 body, html {
@@ -11,6 +12,40 @@ body, html {
     overflow-x: hidden;
     background-color: #0b0c10;
     color: #fff;
+    cursor: none; /* Hide default cursor */
+}
+
+/* Custom cursor */
+#cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    background: hsl(0, 80%, 45%);
+    box-shadow:
+        0 0 5px 1px hsl(0, 80%, 45%),
+        0 0 12px 3px hsla(0, 80%, 45%, 0.35);
+    animation: rgbCursor 3s linear infinite;
+}
+
+@keyframes rgbCursor {
+    0%   { background: hsl(0,   80%, 45%); box-shadow: 0 0 5px 1px hsl(0,   80%, 45%), 0 0 12px 3px hsla(0,   80%, 45%, 0.35); }
+    16%  { background: hsl(60,  80%, 42%); box-shadow: 0 0 5px 1px hsl(60,  80%, 42%), 0 0 12px 3px hsla(60,  80%, 42%, 0.35); }
+    33%  { background: hsl(120, 80%, 38%); box-shadow: 0 0 5px 1px hsl(120, 80%, 38%), 0 0 12px 3px hsla(120, 80%, 38%, 0.35); }
+    50%  { background: hsl(180, 80%, 38%); box-shadow: 0 0 5px 1px hsl(180, 80%, 38%), 0 0 12px 3px hsla(180, 80%, 38%, 0.35); }
+    66%  { background: hsl(240, 80%, 55%); box-shadow: 0 0 5px 1px hsl(240, 80%, 55%), 0 0 12px 3px hsla(240, 80%, 55%, 0.35); }
+    83%  { background: hsl(300, 80%, 48%); box-shadow: 0 0 5px 1px hsl(300, 80%, 48%), 0 0 12px 3px hsla(300, 80%, 48%, 0.35); }
+    100% { background: hsl(360, 80%, 45%); box-shadow: 0 0 5px 1px hsl(360, 80%, 45%), 0 0 12px 3px hsla(360, 80%, 45%, 0.35); }
+}
+
+/* Remove old redundant cursor rules */
+a, button, .projects-summary, .skill-tag {
+    cursor: none !important;
 }
 
 .bg-layer {
@@ -187,6 +222,77 @@ body, html {
     font-weight: 400;
     color: #45f3ff;
     letter-spacing: 1px;
+    min-height: 1.4em;
+}
+
+/* Typewriter cursor */
+.role::after {
+    content: '|';
+    animation: blink 0.7s step-end infinite;
+    color: #45f3ff;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Online status badge */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.55rem;
+    font-weight: 500;
+    color: #4ade80;
+    background: rgba(74, 222, 128, 0.1);
+    border: 1px solid rgba(74, 222, 128, 0.3);
+    border-radius: 20px;
+    padding: 3px 10px;
+    vertical-align: middle;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    -webkit-text-fill-color: #4ade80;
+    filter: none;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+    background: #4ade80;
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulse-green 1.5s ease infinite;
+    flex-shrink: 0;
+}
+
+@keyframes pulse-green {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.5); }
+    50% { box-shadow: 0 0 0 6px rgba(74, 222, 128, 0); }
+}
+
+/* Section staggered entrance */
+.section-anim {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: sectionIn 0.6s ease-out forwards;
+}
+
+@keyframes sectionIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Cursor trail particle */
+.cursor-particle {
+    position: fixed;
+    pointer-events: none;
+    border-radius: 50%;
+    z-index: 9999;
+    animation: particleFade 0.6s ease-out forwards;
 }
 
 .content-divider {
@@ -431,4 +537,14 @@ body, html {
     .links {
         grid-template-columns: 1fr;
     }
+}
+
+@keyframes animateOutline {
+    0% { background-position: 0 0; }
+    100% { background-position: 200% 0; }
+}
+
+@keyframes particleFade {
+    0%   { opacity: 1; transform: scale(1) translateY(0); }
+    100% { opacity: 0; transform: scale(0.2) translateY(-20px); }
 }

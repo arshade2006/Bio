@@ -13,6 +13,7 @@
     <div id="bg-layer" class="bg-layer"></div>
     <div class="overlay"></div>
     <div id="stars-container"></div>
+    <div id="cursor"></div>
     
     <main class="container">
         <div class="card" id="card">
@@ -22,21 +23,21 @@
                     <img src="Resources/MyAvatar.jpg" alt="Avatar" class="avatar-img">
                 </div>
                 <div class="title-info">
-                    <h1 class="nickname">parallax</h1>
-                    <p class="role">C# / Unity Developer</p>
+                    <h1 class="nickname">parallax <span class="status-badge"><span class="status-dot"></span>online</span></h1>
+                    <p class="role" id="typewriter"></p>
                 </div>
             </header>
 
             <div class="content-divider"></div>
 
             <!-- About Section -->
-            <section class="info-section">
+            <section class="info-section section-anim">
                 <h2><i class="fa-solid fa-user-astronaut"></i> About Me</h2>
                 <p>Game dev working with C# & Unity. Focused on clean code, engaging mechanics, and bringing cool ideas to life. Reach out via Telegram.</p>
             </section>
 
             <!-- Skills Section -->
-            <section class="info-section">
+            <section class="info-section section-anim" style="animation-delay: 0.15s">
                 <h2><i class="fa-solid fa-code"></i> Skills</h2>
                 <div class="skills-grid">
                     <span class="skill-tag">C#</span>
@@ -49,7 +50,7 @@
             </section>
 
             <!-- Social Links -->
-            <section class="info-section">
+            <section class="info-section section-anim" style="animation-delay: 0.3s">
                 <h2><i class="fa-solid fa-link"></i> Connect</h2>
                 <div class="links">
                     <a href="https://t.me/parallaxdev" target="_blank" class="link-btn telegram">
