@@ -91,4 +91,13 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let i = 0; i < starsCount; i++) {
         createStar();
     }
+    
+    // Dropdown Logic
+    const projectsToggle = document.getElementById('projectsToggle');
+    if (projectsToggle) {
+        const summary = projectsToggle.querySelector('.projects-summary');
+        summary.addEventListener('click', () => {
+            projectsToggle.classList.toggle('open');
+        });
+    }
 });
